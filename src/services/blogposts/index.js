@@ -16,7 +16,7 @@ blogpostsRouter.post("/", async (req, res, next) => {
     if (error.name === "ValidationError") {
       next(createError(400, error))
     } else {
-      next(createError(500, "An error occurred while saving student"))
+      next(createError(500, "An error occurred while saving blogpost"))
     }
   }
 })
@@ -27,7 +27,7 @@ blogpostsRouter.get("/", async (req, res, next) => {
     res.send(blogposts)
   } catch (error) {
     console.log(error)
-    next(createError(500, "An error occurred while getting students"))
+    next(createError(500, "An error occurred while getting blogposts"))
   }
 })
 
@@ -38,11 +38,11 @@ blogpostsRouter.get("/:id", async (req, res, next) => {
     if (blogpost) {
       res.send(blogpost)
     } else {
-      next(createError(404, `Student ${req.params.id} not found`))
+      next(createError(404, `Blogpost ${req.params.id} not found`))
     }
   } catch (error) {
     console.log(error)
-    next(createError(500, "An error occurred while getting student"))
+    next(createError(500, "An error occurred while getting blogpost"))
   }
 })
 
@@ -55,11 +55,11 @@ blogpostsRouter.put("/:id", async (req, res, next) => {
     if (blogpost) {
       res.send(blogpost)
     } else {
-      next(createError(404, `Student ${req.params.id} not found`))
+      next(createError(404, `Blogpost ${req.params.id} not found`))
     }
   } catch (error) {
     console.log(error)
-    next(createError(500, "An error occurred while modifying student"))
+    next(createError(500, "An error occurred while modifying blogpost"))
   }
 })
 
@@ -69,11 +69,11 @@ blogpostsRouter.delete("/:id", async (req, res, next) => {
     if (blogpost) {
       res.status(204).send()
     } else {
-      next(createError(404, `Student ${req.params.id} not found`))
+      next(createError(404, `Blogpost ${req.params.id} not found`))
     }
   } catch (error) {
     console.log(error)
-    next(createError(500, "An error occurred while deleting student"))
+    next(createError(500, "An error occurred while deleting blogpost"))
   }
 })
 
