@@ -132,7 +132,7 @@ blogpostsRouter.post("/:id/comments/", async (req, res, next) => {
       comments: 1,
       _id: 0,
     })
-    
+
     if (req.body) {
       const commentToInsert = { ...req.body, date: new Date() }
       const updatedBlogpost = await BlogpostModel.findByIdAndUpdate(
@@ -189,14 +189,21 @@ blogpostsRouter.put("/:id/comments/:commentId", async (req, res, next) => {
         _id: req.params.id,
         "comments._id": req.params.commentId,
       },
-      { $set: { "comments.$": req.body } },
+      {
+        $set: {
+          "comments.$._id": req.params.commentId,
+          "comments.$.comment": req.body.comment,
+          "comments.$.rate": req.body.rate,
+          "comments.$.date": new Date()
+        }
+      },
       {
         runValidators: true,
         new: true,
       }
     )
     if (blogpost) {
-      res.send(blogpost)
+      res.send(blogpost.comments)
     } else {
       next(createError(404, `Blogpost ${req.params.id} not found`))
     }
