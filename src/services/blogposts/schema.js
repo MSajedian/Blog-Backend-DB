@@ -40,6 +40,13 @@ const BlogpostSchema = new Schema(
       type: String,
       required: true,
     },
+    comments: [
+      {
+        comment: String,
+        rate: Number,
+        date: Date,
+      },
+    ],
   },
   { timestamps: true }
 )
