@@ -4,6 +4,8 @@ import listEndpoints from "express-list-endpoints"
 import mongoose from "mongoose"
 
 import blogpostsRouter from "./services/blogposts/index.js"
+import authorsRouter from "./services/authors/index.js"
+import usersRouter from "./services/users/index.js"
 
 import { notFoundErrorHandler, badRequestErrorHandler, catchAllErrorHandler } from "./errorHandlers.js"
 
@@ -19,6 +21,8 @@ server.use(cors())
 // ******** ROUTES ************
 
 server.use("/blogposts", blogpostsRouter)
+server.use("/authors", authorsRouter)
+server.use("/users", usersRouter)
 
 // ******** ERROR MIDDLEWARES ************
 
