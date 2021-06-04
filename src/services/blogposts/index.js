@@ -69,7 +69,7 @@ blogpostsRouter.delete("/:id", async (req, res, next) => {
     if (blogpost) {
       res.status(204).send()
     } else {
-      next(createError(404, `Blogpost ${req.params.id} not found`))
+      next(createError(404, `Blogpost with ID ${req.params.id} not found`))
     }
   } catch (error) {
     console.log(error)
