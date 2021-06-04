@@ -22,7 +22,7 @@ authorsRouter.get("/", async (req, res, next) => {
   try {
     const query = q2m(req.query)
     const { authors, total } = await AuthorModel.findAuthorsWithBlogposts(query)
-    res.send({ links: query.links("/author", total), total, authors })
+    res.send({ links: query.links("/authors", total), total, authors })
   } catch (error) {
     console.log(error)
     next(error)

@@ -25,6 +25,7 @@ AuthorSchema.static("findAuthorWithBlogposts", async function (id) {
 })
 
 AuthorSchema.static("findAuthorsWithBlogposts", async function (query) {
+  console.log('query:', query)
   const total = await this.countDocuments(query.criteria)
   const authors = await this.find(query.criteria, query.options.fields)
     .skip(query.options.skip)
