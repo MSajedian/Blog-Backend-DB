@@ -23,7 +23,7 @@ blogpostsRouter.post("/", async (req, res, next) => {
 
 blogpostsRouter.get("/", async (req, res, next) => {
   try {
-    const blogposts = await BlogpostModel.find()
+    const blogposts = await BlogpostModel.find().populate("authors")
     res.send(blogposts)
   } catch (error) {
     console.log(error)
@@ -34,7 +34,7 @@ blogpostsRouter.get("/", async (req, res, next) => {
 blogpostsRouter.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id
-    const blogpost = await BlogpostModel.findById(id)
+    const blogpost = await BlogpostModel.findById(id).populate("authors")
     if (blogpost) {
       res.send(blogpost)
     } else {

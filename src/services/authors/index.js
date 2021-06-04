@@ -21,13 +21,7 @@ authorsRouter.post("/", async (req, res, next) => {
 authorsRouter.get("/", async (req, res, next) => {
   try {
     const query = q2m(req.query)
-    const total = await AuthorModel.countDocuments(query.criteria)
-
-    const authors = await AuthorModel.find(query.criteria, query.options.fields)
-      .skip(query.options.skip)
-      .limit(query.options.limit)
-      .sort(query.options.sort)
-
+    const { authors, total } = await AuthorModel.findAuthorsWithBlogposts(query)
     res.send({ links: query.links("/author", total), total, authors })
   } catch (error) {
     console.log(error)
@@ -37,7 +31,7 @@ authorsRouter.get("/", async (req, res, next) => {
 
 authorsRouter.get("/:id", async (req, res, next) => {
   try {
-    const author = await AuthorModel.findById(req.params.id)
+    const author = await AuthorModel.findAuthorWithBlogposts(req.params.id)
     if (author) {
       res.send(author)
     } else {
