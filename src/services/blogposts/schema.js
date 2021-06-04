@@ -26,16 +26,8 @@ const BlogpostSchema = new Schema(
         required: true,
       },
     },
-    author: {
-      name: {
-        type: String,
-        required: true,
-      },
-      avatar: {
-        type: String,
-        required: true,
-      },
-    },
+    authors: [{ type: Schema.Types.ObjectId, required: true, ref: "Author" }],
+    // author: { name: { type: String, required: true, }, surname: { type: String, required: true, }, avatar: { type: String, required: true, }, },
     content: {
       type: String,
       required: true,

@@ -6,6 +6,7 @@ const { Schema, model } = mongoose
 const AuthorSchema = new Schema({
   name: { type: String, required: true },
   surname: { type: String, required: true },
+  avatar: { type: String, required: true, },
 })
 
 AuthorSchema.post("validate", function (error, doc, next) {
